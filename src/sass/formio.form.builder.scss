@@ -33,11 +33,25 @@
 .builder-component {
   position: relative;
   min-height: 15px;
+  display: flex;
   .formio-component-htmlelement {
     border: dotted 2px #e8e8e8;
     [ref=html]:empty:before {
       content: 'HTML Content';
       color: #aaa;
+    }
+  }
+  .drag-guide {
+    margin-right: 10px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    transition: opacity .3s ease;
+    &:hover {
+      cursor: move;
+      opacity: 1;
     }
   }
 }

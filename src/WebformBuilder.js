@@ -701,9 +701,21 @@ export default class WebformBuilder extends Component {
       return item.id !== 'group-container-resource';
     });
 
+    const sidebarGroups = this.refs['sidebar-groups'];
+
     this.dragula = dragula(containersArray, {
-      moves(el) {
+      moves(el, source, handle) {
         let moves = true;
+
+        if (options.dragGuide) {
+          const sidebarDescendant = sidebarGroups.contains(el);
+          if (!sidebarDescendant) {
+            moves = handle.classList.contains('.drag-guide') || el.contains(handle.closest('.drag-guide'));
+            if (!moves) {
+              return false;
+            }
+          }
+        }
 
         const list = Array.from(el.classList).filter(item => item.indexOf('formio-component-') === 0);
         list.forEach(item => {

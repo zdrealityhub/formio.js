@@ -1,4 +1,10 @@
 <div class="builder-component" ref="dragComponent">
+  {% if (ctx.options.dragGuide) { %}
+    <div class="drag-guide">
+      <i class="fa fa-reorder"></i>
+    </div>
+  {% } %}
+
   {% if (!ctx.disableBuilderActions) { %}
     <div class="component-btn-group" data-noattach="true">
       <div class="btn btn-xxs btn-danger component-settings-button component-settings-button-remove" ref="removeComponent">
