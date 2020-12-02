@@ -48,11 +48,14 @@
     align-items: center;
     justify-content: center;
     opacity: .3;
-    transition: opacity .3s ease;
+    transition: opacity .15s ease;
     &:hover {
       cursor: move;
       opacity: 1;
     }
+  }
+  > div:last-child {
+    flex: 1;
   }
 }
 
