@@ -69,7 +69,7 @@ gulp.task('builder-fonts', function builderFonts() {
 });
 
 // Generate styles
-const compileStyles = (styles, file) => {
+const compileStyles = (styles, file, dest = 'dist') => {
   const sassFilter = filter('**/*.scss', { restore: true });
   return gulp.src(styles)
     .pipe(sassFilter)
@@ -82,10 +82,10 @@ const compileStyles = (styles, file) => {
     .pipe(replace('icons/cross-inverse.svg', `'data:image/svg+xml;charset=utf8,%3Csvg width="21" height="21" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23000" fill-rule="evenodd"%3E%3Cpath d="M2.592.044l18.364 18.364-2.548 2.548L.044 2.592z"/%3E%3Cpath d="M0 18.364L18.364 0l2.548 2.548L2.548 20.912z"/%3E%3C/g%3E%3C/svg%3E'`))
     /* eslint-enable quotes */
     .pipe(replace(/\.\.\/fonts\/\/?/g, 'fonts/'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(dest))
     .pipe(rename(`${file}.min.css`))
     .pipe(cleanCSS({ compatibility: 'ie8' }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(dest));
 };
 gulp.task('styles-form', function formStyles() {
   return compileStyles([
@@ -102,6 +102,15 @@ gulp.task('styles-builder', function builderStyles() {
     './src/sass/formio.form.scss',
     './src/sass/formio.form.builder.scss'
   ], 'formio.builder');
+});
+gulp.task('styles-builder-lib', function builderStyles() {
+  return compileStyles([
+    './node_modules/choices.js/public/assets/styles/choices.min.css',
+    './node_modules/dialog-polyfill/dialog-polyfill.css',
+    './node_modules/dragula/dist/dragula.css',
+    './src/sass/formio.form.scss',
+    './src/sass/formio.form.builder.scss'
+  ], 'formio.builder', 'lib/dist');
 });
 gulp.task('styles-full', gulp.series('builder-fonts', function fullStyles() {
   return compileStyles([
@@ -226,6 +235,12 @@ gulp.task('rebuild-scripts', gulp.series(
 
 // Watch for changes.
 gulp.task('watch-rebuild', () => gulp.watch(['./src/*.js', './src/**/*.js'], gulp.series('rebuild-scripts')));
+
+gulp.task('watch-rebuild-all', () => {
+  gulp.watch(['./src/*.js', './src/**/*.js'], gulp.series('babel-nolint'));
+  gulp.watch(['./src/sass/*.scss'], gulp.series('styles-builder-lib'));
+  gulp.watch(['./src/templates/**/*.ejs', './src/templates/**/*.js'], gulp.series('templates'));
+});
 
 // Default task. Build and watch.
 gulp.task('default', gulp.series('babel', 'scripts-full', 'watch'));
