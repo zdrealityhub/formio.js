@@ -265,8 +265,14 @@ export default class WebformBuilder extends Component {
           title: this.t('Edit')
         });
 
-        component.addEventListener(component.refs.editComponent, 'click', () =>
-          this.editComponent(component.schema, parent, false, false, component.component));
+        component.addEventListener(component.refs.editComponent, 'click', () => {
+          if (typeof component.editComponent === 'function') {
+            component.editComponent();
+            return;
+          }
+
+          this.editComponent(component.schema, parent, false, false, component.component);
+        });
       }
 
       if (component.refs.editJson) {
@@ -1227,6 +1233,7 @@ export default class WebformBuilder extends Component {
     if (!component.key) {
       return;
     }
+
     let saved = false;
     const componentCopy = fastCloneDeep(component);
     let ComponentClass = Components.components[componentCopy.type];
