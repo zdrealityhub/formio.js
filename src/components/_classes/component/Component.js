@@ -1064,6 +1064,18 @@ export default class Component extends Element {
     return NativePromise.resolve();
   }
 
+  getJSONPointer() {
+    const pointer = [this.component.key];
+    let parent = this.parent;
+
+    while (parent) {
+      pointer.unshift(parent.component.key);
+      parent = parent.parent;
+    }
+
+    return `#${pointer.join('/')}`;
+  }
+
   restoreFocus() {
     const isFocused = this.root?.focusedComponent?.path === this.path;
     if (isFocused) {
