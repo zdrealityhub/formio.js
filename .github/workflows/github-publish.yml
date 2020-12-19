@@ -1,0 +1,28 @@
+name: Publish to GitHub Packages
+
+on:
+  release:
+    types: [created]
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    name: Publish Job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 
+        name: Clone the repository
+      - uses: actions/setup-node@v1
+        name: Setup Node.js
+        with:
+          node-version: 14
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+        name: Install dependencies
+      - run: npx gulp build
+        name: Build
+      - run: npm publish lib
+        name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

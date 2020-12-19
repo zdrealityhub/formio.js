@@ -1,6 +1,6 @@
 {
-  "name": "formiojs",
-  "version": "4.12.2-rc.5",
+  "name": "@zerodensity/formiojs",
+  "version": "4.13.0",
   "description": "JavaScript powered Forms with JSON Form Builder",
   "main": "index.js",
   "types": "index.d.ts",
@@ -35,22 +35,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formio/formio.js.git"
+    "url": "git+https://github.com/zerodensity/formio.js.git"
   },
   "contributors": [
     {
       "name": "Form.io Open Source Community",
       "url": "https://github.com/formio/formio.js/graphs/contributors"
+    },
+    {
+      "name": "Zero Density Inc.",
+      "url": "https://github.com/zerodensity/formio.js/graphs/contributors"
     }
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/formio/formio.js/issues"
-  },
   "browser": {
     "vm": false
   },
-  "homepage": "https://github.com/formio/formio.js#readme",
+  "homepage": "https://github.com/zerodensity/formio.js#readme",
   "dependencies": {
     "@formio/bootstrap3": "^2.6.8",
     "@formio/semantic": "^2.4.5",
