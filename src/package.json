@@ -1,26 +1,27 @@
 {
-  "name": "formiojs",
+  "name": "@zerodensity/formiojs",
   "version": "",
   "description": "Common js library for client side interaction with <form.io>",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formio/formio.js.git"
+    "url": "git+https://github.com/zerodensity/formio.js.git"
   },
   "contributors": [
     {
       "name": "Form.io Open Source Community",
       "url": "https://github.com/formio/formio.js/graphs/contributors"
+    },
+    {
+      "name": "Zero Density Inc.",
+      "url": "https://github.com/zerodensity/formio.js/graphs/contributors"
     }
   ],
   "browser": {
     "vm": false
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/formio/formio.js/issues"
-  },
-  "homepage": "https://github.com/formio/formio.js#readme",
+  "homepage": "https://github.com/zerodensity/formio.js#readme",
   "dependencies": {}
 }
