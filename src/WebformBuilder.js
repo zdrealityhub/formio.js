@@ -35,6 +35,8 @@ export default class WebformBuilder extends Component {
     this.schemas = {};
     this.repeatablePaths = [];
 
+    this.additionalDragulaContainers = [];
+
     this.sideBarScroll = _.get(this.options, 'sideBarScroll', true);
     this.sideBarScrollOffset = _.get(this.options, 'sideBarScrollOffset', 0);
 
@@ -696,6 +698,14 @@ export default class WebformBuilder extends Component {
     }
   }
 
+  setAdditionalDragulaContainers(elements) {
+    this.additionalDragulaContainers = elements;
+    if (this.dragula) {
+      const newContainers = this.additionalDragulaContainers.filter((container) => !this.dragula.containers.includes(container));
+      this.dragula.containers.push(...newContainers);
+    }
+  }
+
   initDragula() {
     const options = this.options;
 
@@ -703,46 +713,89 @@ export default class WebformBuilder extends Component {
       this.dragula.destroy();
     }
 
-    const containersArray = Array.prototype.slice.call(this.refs['sidebar-container']).filter(item => {
-      return item.id !== 'group-container-resource';
-    });
+    const containersArray = Array.from(this.refs['sidebar-container'])
+      .filter(item => {
+        return item.id !== 'group-container-resource';
+      })
+      .concat(this.additionalDragulaContainers);
 
     const sidebarGroups = this.refs['sidebar-groups'];
 
-    this.dragula = dragula(containersArray, {
-      moves(el, source, handle) {
-        let moves = true;
+    const moves = (el, source, handle) => {
+      let moves = true;
 
-        if (options.dragGuide) {
-          const sidebarDescendant = sidebarGroups.contains(el);
-          if (!sidebarDescendant) {
-            moves = handle.classList.contains('.drag-guide') || el.contains(handle.closest('.drag-guide'));
-            if (!moves) {
-              return false;
-            }
+      if (options.dragGuide) {
+        const sidebarDescendant = sidebarGroups.contains(el);
+        if (!sidebarDescendant) {
+          moves = handle.classList.contains('.drag-guide') || el.contains(handle.closest('.drag-guide'));
+          if (!moves) {
+            return false;
           }
         }
+      }
 
-        const list = Array.from(el.classList).filter(item => item.indexOf('formio-component-') === 0);
-        list.forEach(item => {
-          const key = item.slice('formio-component-'.length);
-          if (options.disabled && options.disabled.includes(key)) {
-            moves = false;
-          }
-        });
-
-        if (el.classList.contains('no-drag')) {
+      const list = Array.from(el.classList).filter(item => item.indexOf('formio-component-') === 0);
+      list.forEach(item => {
+        const key = item.slice('formio-component-'.length);
+        if (options.disabled && options.disabled.includes(key)) {
           moves = false;
         }
-        return moves;
-      },
-      copy(el) {
-        return el.classList.contains('drag-copy');
-      },
-      accepts(el, target) {
-        return !el.contains(target) && !target.classList.contains('no-drop');
+      });
+
+      if (el.classList.contains('no-drag')) {
+        moves = false;
       }
-    }).on('drop', (element, target, source, sibling) => this.onDrop(element, target, source, sibling));
+      return moves;
+    };
+
+    const copy = (el) => {
+      return el.classList.contains('drag-copy');
+    };
+
+    const accepts = (el, target) => {
+      return !el.contains(target) && !target.classList.contains('no-drop');
+    };
+
+    this.dragula = dragula(containersArray, {
+      isContainer: (el) => {
+        if (typeof options.dragula?.isContainer === 'function') {
+          return options.dragula?.isContainer(el);
+        }
+
+        return false;
+      },
+      moves: (el, source, handle, sibling) => {
+        if (typeof options.dragula?.moves === 'function') {
+          return options.dragula.moves(el, source, handle, sibling, moves);
+        }
+
+        return moves(el, source, handle, sibling);
+      },
+      copy: (el, source) => {
+        if (typeof options.dragula?.copy === 'function') {
+          return options.dragula.copy(el, source, copy);
+        }
+
+        return copy(el, source);
+      },
+      accepts: (el, target, source, sibling) => {
+        if (typeof options.dragula?.accepts === 'function') {
+          return options.dragula.accepts(el, target, source, sibling, accepts);
+        }
+
+        return accepts(el, target, source, sibling);
+      },
+    }).on('drop', (element, target, source, sibling) => {
+      if (typeof options.dragula?.onDrop === 'function') {
+        return options.dragula.onDrop(element, target, source, sibling, this.onDrop.bind(this));
+      }
+
+      this.onDrop(element, target, source, sibling);
+    });
+
+    if (typeof options.dragula?.onCloned === 'function') {
+      this.dragula.on('cloned', options.dragula.onCloned);
+    }
   }
 
   detach() {
