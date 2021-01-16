@@ -20,6 +20,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
         name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: npx gulp build
         name: Build
       - run: npm publish lib
