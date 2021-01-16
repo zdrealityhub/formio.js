@@ -1074,12 +1074,26 @@ div[data-oembed-url] {
 
 .builder-component {
   position: relative;
-  min-height: 15px; }
+  min-height: 15px;
+  display: flex; }
   .builder-component .formio-component-htmlelement {
     border: dotted 2px #e8e8e8; }
     .builder-component .formio-component-htmlelement [ref=html]:empty:before {
       content: 'HTML Content';
       color: #aaa; }
+  .builder-component .drag-guide {
+    margin-right: 10px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    transition: opacity .15s ease; }
+    .builder-component .drag-guide:hover {
+      cursor: move;
+      opacity: 1; }
+  .builder-component > div:last-child {
+    flex: 1; }
 
 .builder-component:not(:hover) .component-btn-group {
   display: none; }
