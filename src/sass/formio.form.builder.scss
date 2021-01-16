@@ -49,6 +49,7 @@
     justify-content: center;
     opacity: .3;
     transition: opacity .15s ease;
+    width: 4px;
     &:hover {
       cursor: move;
       opacity: 1;

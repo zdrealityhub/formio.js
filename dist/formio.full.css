@@ -3426,7 +3426,8 @@ div[data-oembed-url] {
     align-items: center;
     justify-content: center;
     opacity: .3;
-    transition: opacity .15s ease; }
+    transition: opacity .15s ease;
+    width: 4px; }
     .builder-component .drag-guide:hover {
       cursor: move;
       opacity: 1; }
