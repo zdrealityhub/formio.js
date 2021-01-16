@@ -1,7 +1,7 @@
 import Webform from './Webform';
 import Component from './components/_classes/component/Component';
 // Import from "dist" because it would require and "global" would not be defined in Angular apps.
-import dragula from 'dragula/dist/dragula';
+import dragula from '@zerodensity/dragula/dist/dragula';
 import Tooltip from 'tooltip.js';
 import NativePromise from 'native-promise-only';
 import Components from './components/Components';
@@ -757,6 +757,8 @@ export default class WebformBuilder extends Component {
     };
 
     this.dragula = dragula(containersArray, {
+      createMirrorElement: this.options.dragula?.createMirrorElement,
+      createShadowElement: this.options.dragula?.createShadowElement,
       isContainer: (el) => {
         if (typeof options.dragula?.isContainer === 'function') {
           return options.dragula?.isContainer(el);

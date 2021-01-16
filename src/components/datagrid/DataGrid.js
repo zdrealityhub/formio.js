@@ -1,6 +1,6 @@
 import _ from 'lodash';
 // Import from "dist" because it would require and "global" would not be defined in Angular apps.
-import dragula from 'dragula/dist/dragula';
+import dragula from '@zerodensity/dragula/dist/dragula';
 import NestedArrayComponent from '../_classes/nestedarray/NestedArrayComponent';
 import { fastCloneDeep } from '../../utils/utils';
 

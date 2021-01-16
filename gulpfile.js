@@ -98,7 +98,7 @@ gulp.task('styles-builder', function builderStyles() {
   return compileStyles([
     './node_modules/choices.js/public/assets/styles/choices.min.css',
     './node_modules/dialog-polyfill/dialog-polyfill.css',
-    './node_modules/dragula/dist/dragula.css',
+    './node_modules/@zerodensity/dragula/dist/dragula.css',
     './src/sass/formio.form.scss',
     './src/sass/formio.form.builder.scss'
   ], 'formio.builder');
@@ -107,7 +107,7 @@ gulp.task('styles-builder-lib', function builderStyles() {
   return compileStyles([
     './node_modules/choices.js/public/assets/styles/choices.min.css',
     './node_modules/dialog-polyfill/dialog-polyfill.css',
-    './node_modules/dragula/dist/dragula.css',
+    './node_modules/@zerodensity/dragula/dist/dragula.css',
     './src/sass/formio.form.scss',
     './src/sass/formio.form.builder.scss'
   ], 'formio.builder', 'lib/dist');
@@ -116,7 +116,7 @@ gulp.task('styles-full', gulp.series('builder-fonts', function fullStyles() {
   return compileStyles([
     './node_modules/choices.js/public/assets/styles/choices.min.css',
     './node_modules/dialog-polyfill/dialog-polyfill.css',
-    './node_modules/dragula/dist/dragula.css',
+    './node_modules/@zerodensity/dragula/dist/dragula.css',
     './node_modules/font-awesome/css/font-awesome.css',
     './src/sass/formio.form.scss',
     './src/sass/formio.form.builder.scss'
