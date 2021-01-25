@@ -725,7 +725,7 @@ export default class WebformBuilder extends Component {
       let moves = true;
 
       if (options.dragGuide) {
-        const sidebarDescendant = sidebarGroups.contains(el);
+        const sidebarDescendant = !options.hideSidebar && sidebarGroups.contains(el);
         if (!sidebarDescendant) {
           moves = handle.classList.contains('.drag-guide') || el.contains(handle.closest('.drag-guide'));
           if (!moves) {
