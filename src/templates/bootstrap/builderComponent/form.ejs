@@ -8,8 +8,8 @@
   {% if (!ctx.disableBuilderActions) { %}
     <div class="component-btn-group" data-noattach="true">
       {% if (ctx.options.builderActions && ctx.options.builderActions.removeComponent) { %}
-        <div class="btn btn-xxs btn-danger component-settings-button component-settings-button-remove" ref="removeComponent">
-          <i class="{{ctx.iconClass('remove')}}"></i>
+        <div title="Remove" class="btn btn-xxs btn-danger component-settings-button component-settings-button-remove material-icons" ref="removeComponent">
+          close
         </div>
       {% } %}
 
@@ -38,11 +38,12 @@
       {% } %}
 
       {% if (ctx.options.builderActions && ctx.options.builderActions.editComponent) { %}
-        <div class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit", ref="editComponent">
-          <i class="{{ctx.iconClass('cog')}}"></i>
+        <div title="Channels" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editComponent">
+          ballot
         </div>
       {% } %}
     </div>
   {% } %}
+
   {{ctx.html}}
 </div>

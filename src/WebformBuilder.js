@@ -713,7 +713,7 @@ export default class WebformBuilder extends Component {
       this.dragula.destroy();
     }
 
-    const containersArray = Array.from(this.refs['sidebar-container'])
+    const containersArray = Array.from(this.refs['sidebar-container'] || [])
       .filter(item => {
         return item.id !== 'group-container-resource';
       })
