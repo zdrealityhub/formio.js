@@ -218,14 +218,19 @@ export default class WebformBuilder extends Component {
       // Add component to element for later reference.
       element.formioComponent = component;
 
-      component.loadRefs(element, {
-        removeComponent: 'single',
-        editComponent: 'single',
-        moveComponent: 'single',
-        copyComponent: 'single',
-        pasteComponent: 'single',
-        editJson: 'single'
-      });
+      const fields = ['removeComponent', 'editComponent', 'moveComponent', 'copyComponent', 'pasteComponent', 'editJson'];
+      for (const field of fields) {
+        if (
+          component.component.optionsOverride?.builderActions === false ||
+          component.component.optionsOverride?.builderActions?.[field] === false ||
+          this.options.builderActions === false ||
+          this.options.builderActions?.[field] === false
+        ) {
+          continue;
+        }
+
+        component.loadRefs(element, { [field]: 'single' });
+      }
 
       if (component.refs.copyComponent) {
         new Tooltip(component.refs.copyComponent, {
