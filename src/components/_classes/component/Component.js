@@ -419,6 +419,8 @@ export default class Component extends Element {
     // To force this component to be invalid.
     this.invalid = false;
 
+    this._secondaryLabel = '';
+
     if (this.component) {
       this.type = this.component.type;
       if (this.allowData && this.key) {
@@ -3108,6 +3110,24 @@ export default class Component extends Element {
       formio.formUrl = `${formio.projectUrl}/form/${this.root._form._id}`;
     }
     return formio;
+  }
+
+  get secondaryLabel() {
+    return this._secondaryLabel;
+  }
+
+  set secondaryLabel(value = '') {
+    if (typeof value !== 'string') {
+      throw new Error('Secondary label must be a string.');
+    }
+
+    value = String(value);
+    this._secondaryLabel = value.trim();
+    return true;
+  }
+
+  secondaryLabelIsHidden() {
+    return this.secondaryLabel === '';
   }
 }
 
