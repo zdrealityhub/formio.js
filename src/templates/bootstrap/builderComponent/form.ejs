@@ -38,7 +38,13 @@
       {% } %}
 
       {% if (ctx.options.builderActions && ctx.options.builderActions.editComponent) { %}
-        <div title="Channels" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editComponent">
+        <div title="Settings" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editComponent">
+          settings
+        </div>
+      {% } %}
+
+      {% if (ctx.options.builderActions && ctx.options.builderActions.editChannels) { %}
+        <div title="Channels" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editChannels">
           ballot
         </div>
       {% } %}

@@ -218,7 +218,15 @@ export default class WebformBuilder extends Component {
       // Add component to element for later reference.
       element.formioComponent = component;
 
-      const fields = ['removeComponent', 'editComponent', 'moveComponent', 'copyComponent', 'pasteComponent', 'editJson'];
+      const fields = [
+        'removeComponent',
+        'editComponent',
+        'moveComponent',
+        'copyComponent',
+        'pasteComponent',
+        'editJson',
+        'editChannels',
+      ];
       for (const field of fields) {
         if (
           component.component.optionsOverride?.builderActions === false ||
