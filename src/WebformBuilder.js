@@ -1115,11 +1115,13 @@ export default class WebformBuilder extends Component {
       else if (parent.formioComponent && parent.formioComponent.removeChildComponent) {
         parent.formioComponent.removeChildComponent(component);
       }
-      const rebuild = parent.formioComponent.rebuild() || NativePromise.resolve();
-      rebuild.then(() => {
-        this.emit('removeComponent', component, parent.formioComponent.schema, path, index);
-        this.emit('change', this.form);
-      });
+
+      this.alignAdjacentRealityButtons();
+      this.rebuild()
+        .then(() => {
+          this.emit('removeComponent', component, parent.formioComponent.schema, path, index);
+          this.emit('change', this.form);
+        });
     }
     return remove;
   }
