@@ -606,7 +606,7 @@ export function getStrings(form) {
   return strings;
 }
 
-export function unwrapButtons (components = []) {
+export function unwrapButtons(components = []) {
   let i = 0;
   while (i < components.length) {
     const component = components[i];
@@ -615,12 +615,21 @@ export function unwrapButtons (components = []) {
       continue;
     }
 
-    if (component.type === 'table') {
-      const buttons = component.rows[0].map((row) => row.components[0])
-        .filter((component) => !!component);
-      components.splice(i, 1, ...buttons);
-    } else if (component.type === 'realityfieldset') {
-      unwrapButtons(component.components);
+    switch (component.type) {
+      case 'table': {
+        const buttons = component.rows[0].map((row) => row.components[0])
+          .filter((component) => !!component);
+        components.splice(i, 1, ...buttons);
+        break;
+      }
+
+      case 'realityfieldset': {
+        unwrapButtons(component.components);
+        break;
+      }
+
+      default:
+        break;
     }
 
     i += 1;
@@ -659,7 +668,7 @@ export function buttonAligner(components = []) {
   while (index < components.length) {
     const component = components[index];
     if (!component) {
-      components.splice(i, 1);
+      components.splice(index, 1);
       continue;
     }
 
@@ -667,18 +676,18 @@ export function buttonAligner(components = []) {
       adjacentButtons.push(component);
       components.splice(index, 1);
       continue;
-    } else {
-      if (adjacentButtons.length) {
-        components.splice(index, 0, generateTable());
-        // since we have added a new table, the index must be incremented twice
-        index += 1;
+    }
 
-        adjacentButtons.splice(0, adjacentButtons.length);
-      }
+    if (adjacentButtons.length) {
+      components.splice(index, 0, generateTable());
+      // since we have added a new table, the index must be incremented twice
+      index += 1;
 
-      if (component.type === 'realityfieldset') {
-        buttonAligner(component.components);
-      }
+      adjacentButtons.splice(0, adjacentButtons.length);
+    }
+
+    if (component.type === 'realityfieldset') {
+      buttonAligner(component.components);
     }
 
     index += 1;
