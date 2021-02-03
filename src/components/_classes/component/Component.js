@@ -810,8 +810,8 @@ export default class Component extends Element {
     const mode = modeOption || this.options.renderMode || 'form';
 
     data.component = this.component;
-    data.self = this;
-    data.options = this.options;
+    data.self = data.self || this;
+    data.options = { ...this.options, ...data.self.component.optionsOverride };
     data.readOnly = this.options.readOnly;
     data.iconClass = this.iconClass.bind(this);
     data.size = this.size.bind(this);
