@@ -15,7 +15,7 @@ import {
   getStringFromComponentPath,
   searchComponents,
 } from './utils/utils';
-import { eachComponent } from './utils/formUtils';
+import { eachComponent, unwrapButtons, buttonAligner } from './utils/formUtils';
 
 // Initialize the available forms.
 Formio.forms = {};
@@ -601,6 +601,15 @@ export default class Webform extends NestedDataComponent {
     }
   }
 
+  alignAdjacentRealityButtons(form) {
+    if (!form) {
+      form = this.webform.form;
+    }
+
+    unwrapButtons(form.components);
+    buttonAligner(form.components);
+  }
+
   /**
    * Sets the JSON schema for the form to be rendered.
    *
@@ -636,6 +645,7 @@ export default class Webform extends NestedDataComponent {
    * @returns {*}
    */
   setForm(form, flags) {
+    this.alignAdjacentRealityButtons(form);
     const isFormAlreadySet = this._form && this._form.components?.length;
     try {
       // Do not set the form again if it has been already set

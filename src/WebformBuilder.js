@@ -7,7 +7,7 @@ import NativePromise from 'native-promise-only';
 import Components from './components/Components';
 import Formio from './Formio';
 import { fastCloneDeep, bootstrapVersion } from './utils/utils';
-import { eachComponent, getComponent } from './utils/formUtils';
+import { eachComponent, getComponent, buttonAligner, unwrapButtons } from './utils/formUtils';
 import BuilderUtils from './utils/builder';
 import _ from 'lodash';
 import Templates from './templates/Templates';
@@ -983,6 +983,8 @@ export default class WebformBuilder extends Component {
       this.editComponent(info, target, isNew);
     }
 
+    this.alignAdjacentRealityButtons();
+
     // Only rebuild the parts needing to be rebuilt.
     let rebuild;
     if (target !== source) {
@@ -1014,6 +1016,15 @@ export default class WebformBuilder extends Component {
         this.emit('change', this.form);
       }
     });
+  }
+
+  alignAdjacentRealityButtons(form) {
+    if (!form) {
+      form = this.webform.form;
+    }
+
+    unwrapButtons(form.components);
+    buttonAligner(form.components);
   }
 
   setForm(form) {

@@ -605,3 +605,86 @@ export function getStrings(form) {
 
   return strings;
 }
+
+export function unwrapButtons (components = []) {
+  let i = 0;
+  while (i < components.length) {
+    const component = components[i];
+    if (!component) {
+      components.splice(i, 1);
+      continue;
+    }
+
+    if (component.type === 'table') {
+      const buttons = component.rows[0].map((row) => row.components[0])
+        .filter((component) => !!component);
+      components.splice(i, 1, ...buttons);
+    } else if (component.type === 'realityfieldset') {
+      unwrapButtons(component.components);
+    }
+
+    i += 1;
+  }
+}
+
+export function buttonAligner(components = []) {
+  const adjacentButtons = [];
+  let index = 0;
+
+  const generateTable = () => {
+    return {
+      label: '',
+      cellAlignment: 'left',
+      key: 'table',
+      type: 'table',
+      numRows: 1,
+      numCols: adjacentButtons.length,
+      input: false,
+      tableView: false,
+      skipRemoveConfirm: true,
+      optionsOverride: {
+        dragGuide: false,
+        builderActions: false,
+      },
+      rows: [
+        adjacentButtons.map((button) => {
+          return {
+            components: [button],
+          };
+        }),
+      ],
+    };
+  };
+
+  while (index < components.length) {
+    const component = components[index];
+    if (!component) {
+      components.splice(i, 1);
+      continue;
+    }
+
+    if (component.type === 'realitybutton') {
+      adjacentButtons.push(component);
+      components.splice(index, 1);
+      continue;
+    } else {
+      if (adjacentButtons.length) {
+        components.splice(index, 0, generateTable());
+        // since we have added a new table, the index must be incremented twice
+        index += 1;
+
+        adjacentButtons.splice(0, adjacentButtons.length);
+      }
+
+      if (component.type === 'realityfieldset') {
+        buttonAligner(component.components);
+      }
+    }
+
+    index += 1;
+  }
+
+  if (adjacentButtons.length) {
+    components.splice(index, 0, generateTable());
+  }
+}
