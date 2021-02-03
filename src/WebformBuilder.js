@@ -1299,6 +1299,10 @@ export default class WebformBuilder extends Component {
   }
 
   editComponent(component, parent, isNew, isJsonEdit, original) {
+    if (this.options.disableEdit) {
+      return;
+    }
+
     if (!component.key) {
       return;
     }
