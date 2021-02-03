@@ -41,18 +41,21 @@
       color: #aaa;
     }
   }
-  .drag-guide {
-    margin-right: 10px;
-    font-size: 25px;
+  .formio-component-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    opacity: .3;
-    transition: opacity .15s ease;
-    width: 4px;
-    &:hover {
-      cursor: move;
-      opacity: 1;
+    .drag-guide {
+      opacity: .3;
+      transition: opacity .15s ease;
+      font-size: 17px;
+      &:hover {
+        cursor: move;
+        opacity: 1;
+      }
+    }
+    label.col-form-label {
+      padding-left: 3px;
+      color: #cacaca;
     }
   }
   > div:last-child {

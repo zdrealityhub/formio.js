@@ -1,6 +1,12 @@
-{% if (!ctx.label.hidden && ctx.label.labelPosition !== 'bottom') { %}
-  {{ ctx.labelMarkup }}
-{% } %}
+<div class="formio-component-header">
+  {% if (ctx.component.draggable) { %}
+    <div class="drag-guide material-icons">view_week</div>
+  {% } %}
+
+  {% if (!ctx.label.hidden && ctx.label.labelPosition !== 'bottom') { %}
+    {{ ctx.labelMarkup }}
+  {% } %}
+</div>
 
 {% if (ctx.label.hidden && ctx.label.className && ctx.component.validate.required) { %}
   <label class="{{ctx.label.className}}"></label>

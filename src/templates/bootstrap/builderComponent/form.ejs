@@ -1,10 +1,4 @@
 <div class="builder-component" ref="dragComponent">
-  {% if (ctx.options.dragGuide) { %}
-    <div class="drag-guide">
-      <i class="material-icons">drag_indicator</i>
-    </div>
-  {% } %}
-
   {% if (!ctx.disableBuilderActions) { %}
     <div class="component-btn-group" data-noattach="true">
       {% if (ctx.options.builderActions && ctx.options.builderActions.removeComponent) { %}

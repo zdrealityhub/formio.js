@@ -8,14 +8,14 @@ export default class Field extends Component {
     else if (this.isAdvancedLabel) {
       return super.render(this.renderTemplate('field', {
         ...this.getLabelInfo(),
-        labelMarkup: this.component.label ? this.renderTemplate('label') : '',
-        element: element
+        labelMarkup: this.renderTemplate('label'),
+        element,
       }, 'align'));
     }
     else {
       return super.render(this.renderTemplate('field', {
-        labelMarkup: this.component.label ? this.renderTemplate('label') : '',
-        element: element,
+        labelMarkup: this.renderTemplate('label'),
+        element,
       }));
     }
   }
