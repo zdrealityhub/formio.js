@@ -1,3 +1,39 @@
+<div class="formio-component-header">
+  {% if (ctx.builder && ctx.instance.draggable) { %}
+    <div class="drag-guide material-icons">view_week</div>
+  {% } %}
+
+  {% if (!ctx.label.hidden && ctx.label.labelPosition !== 'bottom') { %}
+    {{ ctx.labelMarkup }}
+  {% } %}
+
+  {% if (!ctx.instance.secondaryLabelIsHidden()) { %}
+    <div class="formio-secondary-label">{{ ctx.instance.secondaryLabel }}</div>
+  {% } %}
+
+  {% if (!ctx.disableBuilderActions) { %}
+    <div class="component-btn-group" data-noattach="true">
+      {% if (ctx.options.builderActions && ctx.options.builderActions.editChannels) { %}
+        <div title="Channels" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editChannels">
+          ballot
+        </div>
+      {% } %}
+
+      {% if (ctx.options.builderActions && ctx.options.builderActions.editComponent) { %}
+        <div title="Settings" class="btn btn-xxs btn-secondary component-settings-button component-settings-button-edit material-icons material-icons-outlined" ref="editComponent">
+          settings
+        </div>
+      {% } %}
+
+      {% if (ctx.options.builderActions && ctx.options.builderActions.removeComponent) { %}
+        <div title="Remove" class="btn btn-xxs btn-danger component-settings-button component-settings-button-remove material-icons" ref="removeComponent">
+          close
+        </div>
+      {% } %}
+    </div>
+  {% } %}
+</div>
+
 <fieldset>
   {% if (ctx.component.legend) { %}
   <legend ref="header" 

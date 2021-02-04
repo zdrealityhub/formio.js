@@ -23,13 +23,6 @@
   border: none;
 }
 
-.component-btn-group {
-  position: absolute;
-  right: 0;
-  z-index: 1000;
-  margin-top: -2px;
-}
-
 .builder-component {
   position: relative;
   min-height: 15px;
@@ -68,8 +61,22 @@
       font-style: italic;
     }
   }
+
+.component-btn-group {
+  display: flex;
+  align-items: center;
+  padding-bottom: 3px;
+  padding-left: 5px;
+
+  div[ref=removeComponent] {
+    line-height: 17px;
+    font-size: 20px;
+    padding-left: 0;
+  }
+}
+
 .builder-component:not(:hover) .component-btn-group {
-  display: none;
+  /*display: none;*/
 }
 
 .builder-group-button {
@@ -80,16 +87,6 @@
 
 .form-builder-group-header {
   padding: 0;
-}
-
-.component-btn-group .component-settings-button {
-  float: right;
-  z-index: 1001;
-  margin: 4px 4px 0 0;
-  z-index: 1001;
-  -webkit-box-shadow: 0px 0px 10px 1px rgba(48,113,169,0.6);
-  -moz-box-shadow: 0px 0px 10px 1px rgba(48,113,169,0.6);
-  box-shadow: 0px 0px 10px 1px rgba(48,113,169,0.6);
 }
 
 .formbuilder .formio-component-hidden,
@@ -110,11 +107,22 @@
 
 .btn-xxs, .btn-group-xxs > .btn, .component-btn-group .component-settings-button {
   padding: 2px 2px;
-  font-size: 10px;
-  line-height: 1.2em;
+  font-size: 16px;
   border-radius: 0;
   width: 18px;
   height: 18px;
+
+  &.btn {
+    background: transparent;
+    color: #808080;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: color .3s ease;
+
+    &:hover {
+      color: #ddd;
+    }
+  }
 }
 
 .formcomponents .formcomponent {
