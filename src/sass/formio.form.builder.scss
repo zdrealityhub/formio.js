@@ -41,7 +41,11 @@
       color: #aaa;
     }
   }
-  .formio-component-header {
+  > div:last-child {
+    flex: 1;
+  }
+}
+.formio-component-header {
     display: flex;
     align-items: center;
     .drag-guide {
@@ -64,11 +68,6 @@
       font-style: italic;
     }
   }
-  > div:last-child {
-    flex: 1;
-  }
-}
-
 .builder-component:not(:hover) .component-btn-group {
   display: none;
 }

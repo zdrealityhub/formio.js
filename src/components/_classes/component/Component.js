@@ -419,7 +419,7 @@ export default class Component extends Element {
     // To force this component to be invalid.
     this.invalid = false;
 
-    this._secondaryLabel = '';
+    this._secondaryLabel = component?.secondaryLabel || '';
 
     if (this.component) {
       this.type = this.component.type;
