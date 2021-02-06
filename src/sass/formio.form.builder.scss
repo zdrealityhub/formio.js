@@ -66,17 +66,28 @@
   display: flex;
   align-items: center;
   padding-bottom: 3px;
-  padding-left: 5px;
+  padding-left: 2px;
 
   div[ref=removeComponent] {
-    line-height: 17px;
-    font-size: 20px;
+    line-height: 15px;
+    font-size: 17px;
+    padding-left: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  div[ref=editComponent] {
+    padding-right: 0;
     padding-left: 0;
   }
 }
 
+.formio-component-realityarray .component-btn-group {
+  padding-bottom: 4px;
+}
+
 .builder-component:not(:hover) .component-btn-group {
-  display: none;
+  visibility: hidden;
 }
 
 .builder-group-button {
@@ -106,8 +117,8 @@
 }
 
 .btn-xxs, .btn-group-xxs > .btn, .component-btn-group .component-settings-button {
-  padding: 2px 2px;
-  font-size: 16px;
+  padding: 4px 2px;
+  font-size: 13px;
   border-radius: 0;
   width: 18px;
   height: 18px;
