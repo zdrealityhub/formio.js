@@ -13,6 +13,7 @@ const eslint = require('gulp-eslint');
 const insert = require('gulp-insert');
 const template = require('gulp-template');
 const packageJson = require('./package.json');
+const templateTransformer = require('./src/utils/templateTransformer.js');
 const _ = require('lodash');
 
 // Clean lib folder.
@@ -21,7 +22,7 @@ gulp.task('clean', require('del').bind(null, ['dist', 'lib']));
 // ESLint
 gulp.task('eslint', function eslintTask() {
   return gulp.src(['./src/**/*.js', '!./src/**/*.spec.js'])
-    .pipe(eslint())
+    .pipe(eslint({ fix: true }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
@@ -47,6 +48,7 @@ gulp.task('babel-nolint', gulp.series(function babelTask() {
 // Compile all *.ejs files to pre-compiled templates and append *.js to the filename.
 gulp.task('templates', () =>
   gulp.src('./src/**/*.ejs')
+    .pipe(templateTransformer())
     .pipe(template.precompile({
       evaluate: /\{%([\s\S]+?)%\}/g,
       interpolate: /\{\{([\s\S]+?)\}\}/g,
