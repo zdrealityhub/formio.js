@@ -49,8 +49,10 @@
       {% if (ctx.hasExtraColumn) { %}
         {% if (!ctx.builder && ctx.hasRemoveButtons) { %}
         <td>
-          <button type="button" class="btn btn-secondary formio-button-remove-row" ref="{{ctx.datagridKey}}-removeRow">
-            <i class="{{ctx.iconClass('remove-circle')}}"></i>
+          <button
+            title="Delete" ref="{{ctx.datagridKey}}-removeRow"
+            class="btn-floating darken-3 btn-small delete formio-button-remove-row">
+              <i class="material-icons">delete</i>
           </button>
         </td>
         {% } %}
