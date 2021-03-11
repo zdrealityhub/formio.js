@@ -40,7 +40,10 @@
 }
 .formio-component-header {
     display: flex;
+    height: 17px;
     align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color .3s ease;
     .drag-guide {
       opacity: .3;
       transition: opacity .15s ease;
@@ -59,6 +62,18 @@
       font-size: .8rem;
       padding-left: 3px;
       font-style: italic;
+    }
+    .component-settings-button-undo {
+      display: none;
+    }
+    &.dirty {
+      border-bottom-color: #ff5100;
+      .component-settings-button-undo {
+        display: block;
+        font-size: 14px;
+        line-height: .5;
+        padding-left: 5px;
+      }
     }
   }
 

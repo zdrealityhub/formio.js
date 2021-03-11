@@ -463,6 +463,10 @@ export default class Component extends Element {
     this._data = value;
   }
 
+  get rhDirty() {
+    return false;
+  }
+
   mergeSchema(component = {}) {
     return _.defaultsDeep(component, this.defaultSchema);
   }

@@ -1,4 +1,4 @@
-<div class="formio-component-header">
+<div class="formio-component-header {{ctx.instance.rhDirty ? 'dirty' : ''}}" ref="componentHeader">
   {% if (ctx.builder && ctx.instance.draggable) { %}
     <div class="drag-guide material-icons">view_week</div>
   {% } %}
@@ -9,6 +9,14 @@
 
   {% if (!ctx.instance.secondaryLabelIsHidden()) { %}
     <div class="formio-secondary-label">{{ ctx.instance.secondaryLabel }}</div>
+  {% } %}
+
+  {% if (!ctx.builder) { %}
+    <div
+      title="Undo"
+      class="btn btn-xxs btn-secondary component-settings-button component-settings-button-undo material-icons"
+      ref="rhUndoButton"
+    >undo</div>
   {% } %}
 
   {% if (ctx.builder && !ctx.disableBuilderActions) { %}
