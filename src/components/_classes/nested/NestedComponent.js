@@ -724,6 +724,22 @@ export default class NestedComponent extends Field {
     return NativePromise.all(this.getComponents().map((component) => component.dataReady));
   }
 
+  manuallySetNestedValue(component, value) {
+    component._data = this.componentContext(component);
+    if (component.type === 'button') {
+      return false;
+    }
+    if (component.type === 'components') {
+      return component.manuallySetValue(value);
+    }
+    else if (value && component.hasValue(value)) {
+      return component.manuallySetValue(_.get(value, component.key));
+    }
+    else if (!this.rootPristine || component.visible) {
+      return component.manuallySetValue(component.defaultValue);
+    }
+  }
+
   setNestedValue(component, value, flags = {}) {
     component._data = this.componentContext(component);
     if (component.type === 'button') {
@@ -748,6 +764,15 @@ export default class NestedComponent extends Field {
     }
     return this.getComponents().reduce((changed, component) => {
       return this.setNestedValue(component, value, flags, changed) || changed;
+    }, false);
+  }
+
+  manuallySetValue(value) {
+    if (!value) {
+      return false;
+    }
+    return this.getComponents().reduce((changed, component) => {
+      return this.manuallySetNestedValue(component, value, changed) || changed;
     }, false);
   }
 }
