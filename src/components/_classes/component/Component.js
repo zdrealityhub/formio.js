@@ -67,7 +67,7 @@ export default class Component extends Element {
       multiple: false,
 
       /**
-       * The default value of this compoennt.
+       * The default value of this component.
        */
       defaultValue: null,
 
@@ -2294,6 +2294,12 @@ export default class Component extends Element {
   getValueAt(index) {
     const input = this.performInputMapping(this.refs.input[index]);
     return input ? input.value : undefined;
+  }
+
+  manuallySetValue(value) {
+    const changed = this.setValue(value);
+    this.lastManuallySetValue = value;
+    return changed;
   }
 
   /**
