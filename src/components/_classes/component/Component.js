@@ -3139,6 +3139,14 @@ export default class Component extends Element {
   secondaryLabelIsHidden() {
     return this.secondaryLabel === '';
   }
+
+  updateDefaults() {
+    this.component.defaultValue = this.dataValue;
+
+    for (const component of this.components || []) {
+      component.updateDefaults();
+    }
+  }
 }
 
 Component.externalLibraries = {};
