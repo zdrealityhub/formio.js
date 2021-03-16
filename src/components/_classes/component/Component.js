@@ -3147,6 +3147,20 @@ export default class Component extends Element {
       component.updateDefaults();
     }
   }
+
+  decorateRHDirty() {
+
+  }
+
+  updatePreviouslySentData() {
+    this.previouslySentData = this.dataValue;
+
+    for (const component of this.components || []) {
+      component.updatePreviouslySentData();
+    }
+
+    this.decorateRHDirty();
+  }
 }
 
 Component.externalLibraries = {};
