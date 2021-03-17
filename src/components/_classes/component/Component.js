@@ -1070,6 +1070,51 @@ export default class Component extends Element {
     return NativePromise.resolve();
   }
 
+  getDefaultChannels() {
+    if (typeof this.options.getDefaultChannels === 'function') {
+      return this.options.getDefaultChannels() || [];
+    }
+
+    return [];
+  }
+
+  getAssignedChannels(parentFieldset = this.getParentFieldset()) {
+    const fieldsetChannels = parentFieldset.component.channels;
+
+    if (fieldsetChannels instanceof Array) {
+      const inherits = fieldsetChannels.includes(-1);
+      if (inherits) {
+        return this.getDefaultChannels();
+      }
+
+      return fieldsetChannels;
+    }
+
+    return this.getDefaultChannels();
+  }
+
+  getParentFieldset() {
+    return this.closestComponent('realityfieldset', this, true);
+  }
+
+  closestComponent(componentType, component = this, fallbackToSelf = false) {
+    // If we're at the top (there is no more component to check)
+    if (!component.parent) {
+      if (fallbackToSelf) {
+        return component;
+      }
+
+      return null;
+    }
+
+    // Found the closest component
+    if (component.parent.component.type === componentType) {
+      return component.parent;
+    }
+
+    return this.closestComponent(componentType, component.parent, fallbackToSelf);
+  }
+
   getJSONPointer() {
     const pointer = [this.component.key];
     let parent = this.parent;
