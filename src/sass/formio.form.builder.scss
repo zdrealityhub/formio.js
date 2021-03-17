@@ -63,6 +63,22 @@
       padding-left: 3px;
       font-style: italic;
     }
+    .component-settings-button-play {
+      color: #fff;
+      padding: 2px 3px 0 3px;
+      opacity: .7;
+      font-size: 8px;
+      margin-left: 5px;
+      line-height: 14px;
+      border: 1px solid #ffffff66;
+      border-radius: 2px;
+      transition: opacity .15s ease;
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+        background: #ffffff21;
+      }
+    }
     .component-settings-button-undo {
       display: none;
     }

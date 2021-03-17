@@ -1035,7 +1035,8 @@ export default class Component extends Element {
 
     this.loadRefs(element, {
       messageContainer: 'single',
-      tooltip: 'multiple'
+      tooltip: 'multiple',
+      rhPlayButton: 'single',
     });
 
     this.refs.tooltip.forEach((tooltip, index) => {
@@ -1052,6 +1053,14 @@ export default class Component extends Element {
           </div>`,
       });
     });
+
+    if (this.refs.rhPlayButton) {
+      this.addEventListener(this.refs.rhPlayButton, 'click', () => {
+        if (this.component.propertyPath) {
+          this.emit('rhplayclick', this);
+        }
+      });
+    }
 
     // Attach logic.
     this.attachLogic();
