@@ -1035,7 +1035,8 @@ export default class Component extends Element {
 
     this.loadRefs(element, {
       messageContainer: 'single',
-      tooltip: 'multiple'
+      tooltip: 'multiple',
+      rhPlayButton: 'single',
     });
 
     this.refs.tooltip.forEach((tooltip, index) => {
@@ -1053,6 +1054,14 @@ export default class Component extends Element {
       });
     });
 
+    if (this.refs.rhPlayButton) {
+      this.addEventListener(this.refs.rhPlayButton, 'click', () => {
+        if (this.component.propertyPath) {
+          this.emit('rhplayclick', this);
+        }
+      });
+    }
+
     // Attach logic.
     this.attachLogic();
     this.autofocus();
@@ -1068,6 +1077,51 @@ export default class Component extends Element {
     this.restoreFocus();
 
     return NativePromise.resolve();
+  }
+
+  getDefaultChannels() {
+    if (typeof this.options.getDefaultChannels === 'function') {
+      return this.options.getDefaultChannels() || [];
+    }
+
+    return [];
+  }
+
+  getAssignedChannels(parentFieldset = this.getParentFieldset()) {
+    const fieldsetChannels = parentFieldset.component.channels;
+
+    if (fieldsetChannels instanceof Array) {
+      const inherits = fieldsetChannels.includes(-1);
+      if (inherits) {
+        return this.getDefaultChannels();
+      }
+
+      return fieldsetChannels;
+    }
+
+    return this.getDefaultChannels();
+  }
+
+  getParentFieldset() {
+    return this.closestComponent('realityfieldset', this, true);
+  }
+
+  closestComponent(componentType, component = this, fallbackToSelf = false) {
+    // If we're at the top (there is no more component to check)
+    if (!component.parent) {
+      if (fallbackToSelf) {
+        return component;
+      }
+
+      return null;
+    }
+
+    // Found the closest component
+    if (component.parent.component.type === componentType) {
+      return component.parent;
+    }
+
+    return this.closestComponent(componentType, component.parent, fallbackToSelf);
   }
 
   getJSONPointer() {

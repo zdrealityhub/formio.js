@@ -12,6 +12,14 @@
   {% } %}
 
   {% if (!ctx.builder) { %}
+    {% if (ctx.instance.component.propertyPath) { %}
+      <div
+        title="Play"
+        class="component-settings-button component-settings-button-play"
+        ref="rhPlayButton"
+      >PLAY</div>
+    {% } %}
+
     <div
       title="Undo"
       class="btn btn-xxs btn-secondary component-settings-button component-settings-button-undo material-icons"
