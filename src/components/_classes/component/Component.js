@@ -1060,6 +1060,12 @@ export default class Component extends Element {
           this.emit('rhplayclick', this);
         }
       });
+      this.addEventListener(this.refs.rhPlayButton, 'mouseenter', () => {
+        this.refs.rhPlayButton.closest('.formio-component-header').classList.add('hovering-play');
+      });
+      this.addEventListener(this.refs.rhPlayButton, 'mouseout', () => {
+        this.refs.rhPlayButton.closest('.formio-component-header').classList.remove('hovering-play');
+      });
     }
 
     // Attach logic.
