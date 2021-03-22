@@ -1036,7 +1036,7 @@ export default class Component extends Element {
     this.loadRefs(element, {
       messageContainer: 'single',
       tooltip: 'multiple',
-      rhPlayButton: 'single',
+      rhJumpButton: 'single',
     });
 
     this.refs.tooltip.forEach((tooltip, index) => {
@@ -1054,17 +1054,17 @@ export default class Component extends Element {
       });
     });
 
-    if (this.refs.rhPlayButton) {
-      this.addEventListener(this.refs.rhPlayButton, 'click', () => {
+    if (this.refs.rhJumpButton) {
+      this.addEventListener(this.refs.rhJumpButton, 'click', () => {
         if (this.component.propertyPath) {
           this.emit('rhplayclick', this);
         }
       });
-      this.addEventListener(this.refs.rhPlayButton, 'mouseenter', () => {
-        this.refs.rhPlayButton.closest('.formio-component-header').classList.add('hovering-play');
+      this.addEventListener(this.refs.rhJumpButton, 'mouseenter', () => {
+        this.refs.rhJumpButton.closest('.formio-component-header').classList.add('hovering-play');
       });
-      this.addEventListener(this.refs.rhPlayButton, 'mouseout', () => {
-        this.refs.rhPlayButton.closest('.formio-component-header').classList.remove('hovering-play');
+      this.addEventListener(this.refs.rhJumpButton, 'mouseout', () => {
+        this.refs.rhJumpButton.closest('.formio-component-header').classList.remove('hovering-play');
       });
     }
 
