@@ -11,14 +11,12 @@
     <div class="formio-secondary-label">{{ ctx.instance.secondaryLabel }}</div>
   {% } %}
 
-  {% if (!ctx.builder) { %}
-    {% if (ctx.instance.component.propertyPath) { %}
-      <div
-        title="Jump"
-        class="component-settings-button component-settings-button-jump"
-        ref="rhJumpButton"
-      >JUMP</div>
-    {% } %}
+  {% if (ctx.instance.toolbarVisible) { %}
+    <div
+      title="Jump"
+      class="component-settings-button component-settings-button-jump"
+      ref="rhJumpButton"
+    >JUMP</div>
 
     <div
       title="Reset"
