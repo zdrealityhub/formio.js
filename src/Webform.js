@@ -871,29 +871,8 @@ export default class Webform extends NestedDataComponent {
     });
   }
 
-  manuallySetValue(submission) {
-    if (!submission || !submission.data) {
-      submission = { data: {} };
-    }
-
-    // Metadata needs to be available before setValue
-    this._submission.metadata = submission.metadata || {};
-    this.editing = !!submission._id;
-
-    // Set the timezone in the options if available.
-    if (
-      !this.options.submissionTimezone &&
-      submission.metadata &&
-      submission.metadata.timezone
-    ) {
-      this.options.submissionTimezone = submission.metadata.timezone;
-    }
-
-    const changed = super.manuallySetValue(submission.data);
-    this.mergeData(this.data, submission.data);
-
-    submission.data = this.data;
-    this._submission = submission;
+  manuallySetValue(submission, flags = {}) {
+    const changed = this.setValue(submission, flags);    
     this.lastManuallySetValue = submission;
     return changed;
   }
