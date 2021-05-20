@@ -1060,9 +1060,11 @@ export default class Component extends Element {
       });
       this.addEventListener(this.refs.rhJumpButton, 'mouseenter', () => {
         this.refs.rhJumpButton.closest('.formio-component-header').classList.add('hovering-play');
+        this.emit('rhjump-mouseenter', { channelIds: this.getAssignedChannels() });
       });
       this.addEventListener(this.refs.rhJumpButton, 'mouseout', () => {
         this.refs.rhJumpButton.closest('.formio-component-header').classList.remove('hovering-play');
+        this.emit('rhjump-mouseout');
       });
     }
 
