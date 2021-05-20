@@ -1056,7 +1056,7 @@ export default class Component extends Element {
 
     if (this.refs.rhJumpButton) {
       this.addEventListener(this.refs.rhJumpButton, 'click', () => {
-        this.emit('rhplayclick', this);
+        this.emit('rhjumpclick', this);
       });
       this.addEventListener(this.refs.rhJumpButton, 'mouseenter', () => {
         this.refs.rhJumpButton.closest('.formio-component-header').classList.add('hovering-play');
