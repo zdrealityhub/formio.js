@@ -63,11 +63,21 @@
       padding-left: 3px;
       font-style: italic;
     }
+    .component-settings-button-live-updates {
+      color: #ff7272;
+      padding: 2px 3px 0 3px;
+      font-size: 8px;
+      margin-bottom: 2px;
+      margin-left: 5px;
+      line-height: 14px;
+      border-radius: 2px;
+    }
     .component-settings-button-jump {
       color: #fff;
       padding: 2px 3px 0 3px;
       opacity: .7;
       font-size: 8px;
+      margin-bottom: 2px;
       margin-left: 5px;
       line-height: 14px;
       border: 1px solid #ffffff66;
