@@ -12,6 +12,12 @@
   {% } %}
 
   {% if (ctx.instance.toolbarVisible) { %}
+    {% if (ctx.component.liveUpdatesEnabled) { %}
+      <div 
+        title="Live Updates"
+        class="component-settings-button component-settings-button-live-updates"
+      >RT</div>
+    {% } %}
     <div
       title="Jump"
       class="component-settings-button component-settings-button-jump"
