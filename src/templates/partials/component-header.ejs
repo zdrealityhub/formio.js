@@ -4,7 +4,7 @@
   {% } %}
 
   {% if (!ctx.label.hidden && ctx.instance.showPrimaryLabel !== false && ctx.label.labelPosition !== 'bottom') { %}
-    {{ ctx.labelMarkup }}
+    {{ ctx.labelMarkup || '' }}
   {% } %}
 
   {% if (!ctx.instance.secondaryLabelIsHidden()) { %}

@@ -3197,7 +3197,7 @@ export default class Component extends Element {
   }
 
   secondaryLabelIsHidden() {
-    return this.secondaryLabel === '';
+    return this.showBindingInfo === false || this.secondaryLabel === '';
   }
 
   updateDefaults() {
