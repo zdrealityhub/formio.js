@@ -1,6 +1,6 @@
 {
   "name": "@zerodensity/formiojs",
-  "version": "7.2.1",
+  "version": "7.3.0",
   "description": "JavaScript powered Forms with JSON Form Builder",
   "main": "index.js",
   "types": "index.d.ts",
