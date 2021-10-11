@@ -736,6 +736,8 @@ export default class NestedComponent extends Field {
       return component.manuallySetValue(_.get(value, component.key), flags);
     }
     else if (!this.rootPristine || component.visible) {
+      flags.noValidate = !flags.dirty;
+      flags.resetValue = true;
       return component.manuallySetValue(component.defaultValue, flags);
     }
   }
