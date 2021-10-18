@@ -463,10 +463,6 @@ export default class Component extends Element {
     this._data = value;
   }
 
-  get rhDirty() {
-    return false;
-  }
-
   mergeSchema(component = {}) {
     return _.defaultsDeep(component, this.defaultSchema);
   }
@@ -3208,18 +3204,64 @@ export default class Component extends Element {
     }
   }
 
-  decorateRHDirty() {
-
-  }
-
-  updatePreviouslySentData() {
-    this.previouslySentData = this.dataValue;
+  updateLastSavedData() {
+    this.lastSavedData = this.dataValue;
 
     for (const component of this.components || []) {
-      component.updatePreviouslySentData();
+      component.updateLastSavedData();
+    }
+  }
+
+  updateLastSentData() {
+    this.lastSentData = this.dataValue;
+
+    for (const component of this.components || []) {
+      component.updateLastSentData();
+    }
+  }
+
+  getLastSentData() {
+    if (this.lastSentData === undefined) {
+      let originalValue;
+      
+      if (this.lastManuallySetValue !== undefined) {
+        originalValue = this.lastManuallySetValue;
+      } else if (this.defaultValue !== undefined) {
+        originalValue = this.defaultValue;
+      } else {
+        originalValue = {};
+      }
+
+      return originalValue;
     }
 
-    this.decorateRHDirty();
+    return this.lastSentData;
+  }
+
+  getLastSavedData() {
+    if (this.lastSavedData === undefined) {
+      let originalValue;
+      
+      if (this.lastManuallySetValue !== undefined) {
+        originalValue = this.lastManuallySetValue;
+      } else if (this.defaultValue !== undefined) {
+        originalValue = this.defaultValue;
+      } else {
+        originalValue = {};
+      }
+
+      return originalValue;
+    }
+
+    return this.lastSavedData;
+  }
+
+  isChangedFromLastSent() {
+    return false;
+  }
+
+  isChangedFromLastSaved() {
+    return false;
   }
 }
 

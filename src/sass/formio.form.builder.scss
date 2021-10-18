@@ -91,10 +91,7 @@
     }
     .component-settings-button-undo {
       display: none;
-    }
-    &.dirty {
-      border-bottom-color: #ff5100;
-      .component-settings-button-undo {
+      &.last-saved-changed {
         display: block;
         font-size: 14px;
         line-height: .5;
