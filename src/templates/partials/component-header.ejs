@@ -23,7 +23,9 @@
       class="component-settings-button component-settings-button-jump"
       ref="rhJumpButton"
     >JUMP</div>
+  {% } %}
 
+  {% if (ctx.instance.showResetButton) { %}
     <div
       title="Reset"
       class="btn btn-xxs btn-secondary component-settings-button component-settings-button-undo material-icons"
